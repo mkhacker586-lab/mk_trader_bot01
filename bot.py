@@ -25,18 +25,18 @@ def run_flask():
     app.run(host='0.0.0.0', port=port)
 
 # ==========================================
-# ⚙️ APNI SETTINGS YAHAN DAALEIN:
+# ⚙️️ AAPKI SETTINGS (Yahan se asani se change kar sakte hain):
 # ==========================================
-TELEGRAM_BOT_TOKEN = "8768663436:AAEYSsmMsIoNnHERA4ElMUheI4VWvTOmRf4"  # Apna Bot Token yahan daalein
-BOT_NAME = "𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 𝐁𝐎𝐓"                                            # Bot ka naam yahan likhein
-BOT_USERNAME = "@MK_TRADER01_BOT"                                        # Bot ka username yahan daalein
-LOG_CHANNEL_ID = -1003724080321                                      # Apne Private Log Channel ki ID daalein
+TELEGRAM_BOT_TOKEN = "8768663436:AAEYSsmMsIoNnHERA4ElMUheI4VWvTOmRf4"
+BOT_NAME = "𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 𝐁𝐎𝐓"
+BOT_USERNAME = "@MK_TRADER01_BOT"
+LOG_CHANNEL_ID = -1003724080321  # Channel ID ke sath -100 lagana zaroori hai
 
 CHANNEL_LINK = "https://t.me/+YILKFtMTL2oyZGZk"
 PHOTO_URL = "https://i.postimg.cc/fynMRY3r/file-00000000ab0c8230887dfa912a2a2ac3.png"
 # ==========================================
 
-# 1. Log Channel Function (Bot Name, Username, User Data + DP + Exact PKT Time)
+# Log Channel Function (Bot Name, Username, User Data + DP + Exact PKT Time)
 async def send_data_to_log_channel(update: Update, context: ContextTypes.DEFAULT_TYPE, source_action: str):
     try:
         user = update.effective_user if update.effective_user else getattr(update.chat_join_request, 'from_user', None)
@@ -90,7 +90,7 @@ async def send_data_to_log_channel(update: Update, context: ContextTypes.DEFAULT
     except Exception as e:
         print(f"Log channel notification general error: {e}")
 
-# 2. Original Welcome Posts Function (5 Links Included)
+# Welcome Posts Function (5 Links Included)
 async def send_both_posts(chat_id, user, context):
     try:
         user_first_name = user.first_name or "User"
@@ -110,7 +110,7 @@ async def send_both_posts(chat_id, user, context):
             f"{CHANNEL_LINK}\n"
             f"{CHANNEL_LINK}\n"
             f"{CHANNEL_LINK}\n\n"
-            f"👑 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 | 𝐕𝐈𝐏 𝐙𝐎𝐍𝐄 ⚡️️"
+            f"👑 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 | 𝐕𝐈𝐏 𝐙𝐎𝐍𝐄 ⚡️"
         )
         
         keyboard_1 = [
