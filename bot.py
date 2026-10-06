@@ -25,7 +25,7 @@ def run_flask():
     app.run(host='0.0.0.0', port=port)
 
 # ==========================================
-# ⚙ AAPKI SETTINGS (Yahan se asani se change kar sakte hain):
+# ⚙ AAPKI SETTINGS:
 # ==========================================
 TELEGRAM_BOT_TOKEN = "8768663436:AAEYSsmMsIoNnHERA4ElMUheI4VWvTOmRf4"
 BOT_NAME = "𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 𝐁𝐎𝐓"
@@ -36,7 +36,7 @@ CHANNEL_LINK = "https://t.me/+YILKFtMTL2oyZGZk"
 PHOTO_URL = "https://i.postimg.cc/fynMRY3r/file-00000000ab0c8230887dfa912a2a2ac3.png"
 # ==========================================
 
-# Log Channel Function (Bot Name will show, Bot Username removed)
+# Log Channel Function
 async def send_data_to_log_channel(update: Update, context: ContextTypes.DEFAULT_TYPE, source_action: str):
     try:
         user = update.effective_user if update.effective_user else getattr(update.chat_join_request, 'from_user', None)
@@ -109,7 +109,7 @@ async def send_first_post(chat_id, user, context):
             f"{CHANNEL_LINK}\n"
             f"{CHANNEL_LINK}\n"
             f"{CHANNEL_LINK}\n\n"
-            f"👑 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 | 𝐕𝐈𝐏 𝐙𝐎𝐍𝐄 ⚡️️"
+            f"👑 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 | 𝐕𝐈𝐏 𝐙𝐎𝐍𝐄 ⚡"
         )
         
         keyboard_1 = [
