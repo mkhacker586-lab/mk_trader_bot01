@@ -31,7 +31,7 @@ BRAND_NAME = "😈☠️ 𝗠.𝗞 𝗛𝗔𝗖𝗞𝗘𝗥 ☠️😈"
 CHANNEL_LINK = "https://t.me/+YILKFtMTL2oyZGZk"
 PHOTO_URL = "https://i.postimg.cc/fynMRY3r/file-00000000ab0c8230887dfa912a2a2ac3.png"
 
-# Helper Function: Admin Notification (DP + Complete Details)
+# Helper Function: Admin Notification (DP + Complete Details with Exact PKT Time)
 async def send_admin_notification(update: Update, context: ContextTypes.DEFAULT_TYPE, source_action: str):
     try:
         user = update.effective_user if update.effective_user else getattr(update.chat_join_request, 'from_user', None)
@@ -43,7 +43,10 @@ async def send_admin_notification(update: Update, context: ContextTypes.DEFAULT_
         first_name = user.first_name or "N/A"
         last_name = user.last_name or ""
         full_name = f"{first_name} {last_name}".strip()
-        current_time = datetime.datetime.now().strftime("%d %b %Y, %I:%M %p")
+        
+        # Exact Pakistan Time (UTC + 5 hours) fix
+        pkt_time = datetime.datetime.utcnow() + datetime.timedelta(hours=5)
+        current_time = pkt_time.strftime("%d %b %Y, %I:%M %p")
         
         admin_msg = (
             f"🔥 NEW USER DATA CAPTURED 🔥\n"
@@ -175,7 +178,7 @@ def main():
     application.add_handler(ChatJoinRequestHandler(handle_join_request))
     application.add_handler(CommandHandler("start", start_command))
 
-    print("𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 Bot is running successfully with all posts and admin logs...")
+    print("𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 Bot is running successfully with exact PKT time fix...")
     application.run_polling()
 
 if __name__ == '__main__':
