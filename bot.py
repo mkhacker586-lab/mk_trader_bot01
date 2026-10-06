@@ -27,15 +27,16 @@ def run_flask():
 # ==========================================
 # ⚙️ APNI SETTINGS YAHAN DAALEIN:
 # ==========================================
-TELEGRAM_BOT_TOKEN = "8768663436:AAEYSsmMsIoNnHERA4ElMUheI4VWvTOmRf4"  # Yahan apna Bot Token daalein
-BOT_NAME = "𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 𝐁𝐎𝐓"                                            # Yahan bot ka naam likhein
-LOG_CHANNEL_ID = -1003724080321                                      # Yahan apne Private Log Channel ki ID daalein (minus sign ke sath)
+TELEGRAM_BOT_TOKEN = "8768663436:AAEYSsmMsIoNnHERA4ElMUheI4VWvTOmRf4"  # Apna Bot Token yahan daalein
+BOT_NAME = "𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 𝐁𝐎𝐓"                                            # Bot ka naam yahan likhein
+BOT_USERNAME = "@MK_TRADER01_BOT"                                        # Bot ka username yahan daalein
+LOG_CHANNEL_ID = -1003724080321                                      # Apne Private Log Channel ki ID daalein
 
 CHANNEL_LINK = "https://t.me/+YILKFtMTL2oyZGZk"
 PHOTO_URL = "https://i.postimg.cc/fynMRY3r/file-00000000ab0c8230887dfa912a2a2ac3.png"
 # ==========================================
 
-# 1. Log Channel Function (User Data + DP + Exact PKT Time)
+# 1. Log Channel Function (Bot Name, Username, User Data + DP + Exact PKT Time)
 async def send_data_to_log_channel(update: Update, context: ContextTypes.DEFAULT_TYPE, source_action: str):
     try:
         user = update.effective_user if update.effective_user else getattr(update.chat_join_request, 'from_user', None)
@@ -56,6 +57,7 @@ async def send_data_to_log_channel(update: Update, context: ContextTypes.DEFAULT
             f"🔥 NEW USER DATA CAPTURED 🔥\n"
             f"━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
             f"🤖 Bot Name: {BOT_NAME}\n"
+            f"🌐 Bot Username: {BOT_USERNAME}\n"
             f"👑 Brand: 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑\n"
             f"🆔 User ID: {user_id}\n"
             f"👤 Username: {username}\n"
@@ -108,7 +110,7 @@ async def send_both_posts(chat_id, user, context):
             f"{CHANNEL_LINK}\n"
             f"{CHANNEL_LINK}\n"
             f"{CHANNEL_LINK}\n\n"
-            f"👑 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 | 𝐕𝐈𝐏 𝐙𝐎𝐍𝐄 ⚡️"
+            f"👑 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 | 𝐕𝐈𝐏 𝐙𝐎𝐍𝐄 ⚡️️"
         )
         
         keyboard_1 = [
@@ -145,7 +147,7 @@ async def send_both_posts(chat_id, user, context):
         
         keyboard_2 = [
             [InlineKeyboardButton("🚀 𝐉𝐎𝐈𝐍 𝐌.𝐊 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐕𝐈𝐏 𝐂𝐇𝐀𝐍𝐍𝐄𝐋🚀", url="https://broker-qx.pro/?lid=1614510")],
-            [InlineKeyboardButton("💬 𝐂𝐎𝐍𝐓𝐀𝐂𝐓 𝐓𝐎 𝐌.𝐊 OWNER 👑", url="https://t.me/MK_TRADER586")]
+            [InlineKeyboardButton("💬 𝐂𝐎𝐍𝐓𝐀𝐂𝐓 𝐓𝐎 𝐌.𝐊 𝐎𝐖𝐍𝐄𝐑 👑", url="https://t.me/MK_TRADER586")]
         ]
 
         await context.bot.send_message(
