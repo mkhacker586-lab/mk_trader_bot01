@@ -18,21 +18,25 @@ app = Flask('')
 
 @app.route('/')
 def home():
-    return "𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 VIP Bot is active and running!"
+    return "𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 Bot with Log Channel is active and running!"
 
 def run_flask():
     port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port)
 
-# --- AAPKI SETTINGS ---
-ADMIN_ID = 7588675873  
-ADMIN_USERNAME = "@MK_TRADER586"
-BRAND_NAME = "😈☠️ 𝗠.𝗞 𝗛𝗔𝗖𝗞𝗘𝗥 ☠️😈"
+# ==========================================
+# ⚙️ APNI SETTINGS YAHAN DAALEIN:
+# ==========================================
+TELEGRAM_BOT_TOKEN = "8768663436:AAEYSsmMsIoNnHERA4ElMUheI4VWvTOmRf4"  # Yahan apna Bot Token daalein
+BOT_NAME = "𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 𝐁𝐎𝐓"                                            # Yahan bot ka naam likhein
+LOG_CHANNEL_ID = -1003724080321                                      # Yahan apne Private Log Channel ki ID daalein (minus sign ke sath)
+
 CHANNEL_LINK = "https://t.me/+YILKFtMTL2oyZGZk"
 PHOTO_URL = "https://i.postimg.cc/fynMRY3r/file-00000000ab0c8230887dfa912a2a2ac3.png"
+# ==========================================
 
-# Helper Function: Admin Notification (DP + Complete Details with Exact PKT Time)
-async def send_admin_notification(update: Update, context: ContextTypes.DEFAULT_TYPE, source_action: str):
+# 1. Log Channel Function (User Data + DP + Exact PKT Time)
+async def send_data_to_log_channel(update: Update, context: ContextTypes.DEFAULT_TYPE, source_action: str):
     try:
         user = update.effective_user if update.effective_user else getattr(update.chat_join_request, 'from_user', None)
         if not user:
@@ -48,9 +52,10 @@ async def send_admin_notification(update: Update, context: ContextTypes.DEFAULT_
         pkt_time = datetime.datetime.utcnow() + datetime.timedelta(hours=5)
         current_time = pkt_time.strftime("%d %b %Y, %I:%M %p")
         
-        admin_msg = (
+        log_msg = (
             f"🔥 NEW USER DATA CAPTURED 🔥\n"
             f"━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            f"🤖 Bot Name: {BOT_NAME}\n"
             f"👑 Brand: 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑\n"
             f"🆔 User ID: {user_id}\n"
             f"👤 Username: {username}\n"
@@ -65,25 +70,25 @@ async def send_admin_notification(update: Update, context: ContextTypes.DEFAULT_
             if photos.total_count > 0:
                 file_id = photos.photos[0][-1].file_id
                 await context.bot.send_photo(
-                    chat_id=ADMIN_ID,
+                    chat_id=LOG_CHANNEL_ID,
                     photo=file_id,
-                    caption=admin_msg
+                    caption=log_msg
                 )
             else:
                 await context.bot.send_message(
-                    chat_id=ADMIN_ID,
-                    text=admin_msg + "\n\n*(User has no Profile Picture)*"
+                    chat_id=LOG_CHANNEL_ID,
+                    text=log_msg + "\n\n*(User has no Profile Picture)*"
                 )
         except Exception as inner_e:
-            print(f"Photo sending error to admin: {inner_e}")
+            print(f"Photo sending error to log channel: {inner_e}")
             await context.bot.send_message(
-                chat_id=ADMIN_ID,
-                text=admin_msg
+                chat_id=LOG_CHANNEL_ID,
+                text=log_msg
             )
     except Exception as e:
-        print(f"Admin notification general error: {e}")
+        print(f"Log channel notification general error: {e}")
 
-# Function: Sending both posts sequentially without any formatting failure
+# 2. Original Welcome Posts Function (5 Links Included)
 async def send_both_posts(chat_id, user, context):
     try:
         user_first_name = user.first_name or "User"
@@ -140,7 +145,7 @@ async def send_both_posts(chat_id, user, context):
         
         keyboard_2 = [
             [InlineKeyboardButton("🚀 𝐉𝐎𝐈𝐍 𝐌.𝐊 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐕𝐈𝐏 𝐂𝐇𝐀𝐍𝐍𝐄𝐋🚀", url="https://broker-qx.pro/?lid=1614510")],
-            [InlineKeyboardButton("💬 𝐂𝐎𝐍𝐓𝐀𝐂𝐓 𝐓𝐎 𝐌.𝐊 𝐎𝐖𝐍𝐄𝐑 👑", url="https://t.me/MK_TRADER586")]
+            [InlineKeyboardButton("💬 𝐂𝐎𝐍𝐓𝐀𝐂𝐓 𝐓𝐎 𝐌.𝐊 OWNER 👑", url="https://t.me/MK_TRADER586")]
         ]
 
         await context.bot.send_message(
@@ -154,19 +159,17 @@ async def send_both_posts(chat_id, user, context):
 # Handlers
 async def handle_join_request(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.chat_join_request.from_user
-    await send_admin_notification(update, context, "Channel Join Request")
+    await send_data_to_log_channel(update, context, "Channel Join Request")
     await send_both_posts(user.id, user, context)
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
-    await send_admin_notification(update, context, "Bot /start Command")
+    await send_data_to_log_channel(update, context, "Bot /start Command")
     await send_both_posts(user.id, user, context)
 
 def main():
     server_thread = Thread(target=run_flask, daemon=True)
     server_thread.start()
-    
-    TELEGRAM_BOT_TOKEN = "8768663436:AAEYSsmMsIoNnHERA4ElMUheI4VWvTOmRf4"
 
     try:
         requests.get(f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/deleteWebhook?drop_pending_updates=true")
@@ -178,7 +181,7 @@ def main():
     application.add_handler(ChatJoinRequestHandler(handle_join_request))
     application.add_handler(CommandHandler("start", start_command))
 
-    print("𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 Bot is running successfully with exact PKT time fix...")
+    print("𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 Bot is running successfully with Log Channel...")
     application.run_polling()
 
 if __name__ == '__main__':
