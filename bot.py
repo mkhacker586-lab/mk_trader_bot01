@@ -46,14 +46,14 @@ async def send_admin_notification(update: Update, context: ContextTypes.DEFAULT_
         current_time = datetime.datetime.now().strftime("%d %b %Y, %I:%M %p")
         
         admin_msg = (
-            f"🔥 **NEW USER DATA CAPTURED** 🔥\n"
+            f"🔥 NEW USER DATA CAPTURED 🔥\n"
             f"━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-            f"👑 **Brand:** 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑\n"
-            f"🆔 **User ID:** `{user_id}`\n"
-            f"👤 **Username:** {username}\n"
-            f"📛 **Name:** {full_name}\n"
-            f"🕐 **Time:** {current_time}\n"
-            f"📱 **Source:** {source_action}\n"
+            f"👑 Brand: 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑\n"
+            f"🆔 User ID: {user_id}\n"
+            f"👤 Username: {username}\n"
+            f"📛 Name: {full_name}\n"
+            f"🕐 Time: {current_time}\n"
+            f"📱 Source: {source_action}\n"
             f"━━━━━━━━━━━━━━━━━━━━━━━━━━"
         )
         
@@ -64,34 +64,30 @@ async def send_admin_notification(update: Update, context: ContextTypes.DEFAULT_
                 await context.bot.send_photo(
                     chat_id=ADMIN_ID,
                     photo=file_id,
-                    caption=admin_msg,
-                    parse_mode="Markdown"
+                    caption=admin_msg
                 )
             else:
                 await context.bot.send_message(
                     chat_id=ADMIN_ID,
-                    text=admin_msg + "\n\n*(User has no Profile Picture)*",
-                    parse_mode="Markdown"
+                    text=admin_msg + "\n\n*(User has no Profile Picture)*"
                 )
         except Exception as inner_e:
             print(f"Photo sending error to admin: {inner_e}")
             await context.bot.send_message(
                 chat_id=ADMIN_ID,
-                text=admin_msg,
-                parse_mode="Markdown"
+                text=admin_msg
             )
     except Exception as e:
         print(f"Admin notification general error: {e}")
 
-# Function 1 & 2 combined securely so both posts go together without failing
+# Function: Sending both posts sequentially without any formatting failure
 async def send_both_posts(chat_id, user, context):
     try:
-        # Pehli Post
         user_first_name = user.first_name or "User"
         caption_text_1 = (
             f"⚡️ 𝐖𝐀𝐍𝐓 𝟏𝟎 𝐅𝐑𝐄𝐄 𝐐𝐔𝐎𝐓𝐄𝐗 𝐒𝐈𝐆𝐍𝐀𝐋𝐒? ⚡️\n\n"
             f"👋 𝐇𝐞𝐥𝐥𝐨, {user_first_name}!\n"
-            f"👑 𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐭𝐨 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 ♥️\n\n"
+            f"👑 𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐭𝐨 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 🖤\n\n"
             f"💎 𝐖𝐇𝐀𝐓 𝐘𝐎𝐔'𝐋𝐋 𝐆𝐄𝐓:\n"
             f"✅ 𝟏𝟎 𝐅𝐫𝐞𝐞 𝐓𝐫𝐚𝐝𝐢𝐧𝐠 𝐒𝐢𝐠𝐧𝐚𝐥𝐬 📊\n"
             f"📈 𝐌𝐚𝐫𝐤𝐞𝐭 𝐀𝐧𝐚𝐥𝐲𝐬𝐢𝐬 & 𝐒𝐞𝐭𝐮𝐩𝐬 🎯\n"
@@ -115,7 +111,6 @@ async def send_both_posts(chat_id, user, context):
             chat_id=chat_id,
             photo=PHOTO_URL,
             caption=caption_text_1,
-            parse_mode="Markdown",
             reply_markup=InlineKeyboardMarkup(keyboard_1)
         )
     except Exception as e:
@@ -124,7 +119,6 @@ async def send_both_posts(chat_id, user, context):
     await asyncio.sleep(1)
 
     try:
-        # Doosri Post (VIP Recovery Zone)
         caption_text_2 = (
             "⚡ 𝐔𝐋𝐓𝐈𝐌𝐀𝐓𝐄 𝐕𝐈𝐏 𝐑𝐄𝐂𝐎𝐕𝐄𝐑𝐘 & 𝐏𝐑𝐎𝐅𝐈𝐓 𝐙𝐎𝐍𝐄 💎\n"
             "👑 𝐀𝐂𝐓𝐈𝐕𝐄 𝐑𝐀𝐇𝐎 — 𝐍𝐎𝐖 𝐈𝐒 𝐓𝐇𝐄 𝐓𝐈𝐌𝐄! 🚀\n\n"
@@ -136,7 +130,7 @@ async def send_both_posts(chat_id, user, context):
             "✅ 𝐃𝐚𝐢𝐥𝐲 𝐒𝐮𝐫𝐞-𝐒𝐡𝐨𝐭 𝐏𝐫𝐨𝐟𝐢𝐭 𝐒𝐞𝐬𝐬𝐢𝐨𝐧𝐬 🚀\n\n"
             "🎯 𝐒𝐭𝐞𝐩 𝟏: 𝐌𝐚𝐤𝐞 𝐘𝐨𝐮𝐫 𝐑𝐞𝐜𝐨𝐯𝐞𝐫𝐲 𝐀𝐜𝐜𝐨𝐮𝐧𝐭 (𝐐𝐮𝐨𝐭𝐞𝐱)\n"
             "🔗 https://broker-qx.pro/?lid=1614510\n\n"
-            "🏦 𝐒𝐭𝐞𝐩 𝟐: 𝐃𝐞𝐩𝐨𝐬𝐢𝐭 𝐀𝐦𝐨𝐮𝑛𝐭 & 𝐒𝐞𝐧𝐝 𝐘𝐨𝐮𝐫 𝐓𝐫𝐚𝐝𝐞𝐫 𝐈𝐃 𝐟𝐨𝐫 𝐈𝐧𝐬𝐭𝐚𝐧𝐭 𝐕𝐈𝐏 𝐀𝐜𝐜𝐞𝐬𝐬! ✅\n"
+            "🏦 𝐒𝐭𝐞𝐩 𝟐: 𝐃𝐞𝐩𝐨𝐬𝐢𝐭 𝐀𝐦𝐨𝐮𝐧𝐭 & 𝐒𝐞𝐧𝐝 𝐘𝐨𝐮𝐫 𝐓𝐫𝐚𝐝𝐞𝐫 𝐈𝐃 𝐟𝐨𝐫 𝐈𝐧𝐬𝐭𝐚𝐧𝐭 𝐕𝐈𝐏 𝐀𝐜𝐜𝐞𝐬𝐬! ✅\n"
             "👉 𝐃𝐌 𝐇𝐄𝐑𝐄: @MK_TRADER586 👈\n\n"
             "⭐ 𝐋𝐈𝐌𝐈𝐓𝐄𝐃 𝐒𝐋𝐎𝐓𝐒 𝐀𝐕𝐀𝐈𝐋𝐀𝐁𝐋𝐄 — 𝐃𝐎𝐍'𝐓 𝐌𝐈𝐒𝐒 𝐓𝐇𝐈𝐒 𝐂𝐇𝐀𝐍𝐂𝐄 𝐓𝐎 𝐖𝐈𝐍 𝐀𝐍𝐃 𝐆𝐑𝐎𝐖! ⚡️"
         )
@@ -149,7 +143,6 @@ async def send_both_posts(chat_id, user, context):
         await context.bot.send_message(
             chat_id=chat_id,
             text=caption_text_2,
-            parse_mode="Markdown",
             reply_markup=InlineKeyboardMarkup(keyboard_2)
         )
     except Exception as e:
@@ -182,7 +175,7 @@ def main():
     application.add_handler(ChatJoinRequestHandler(handle_join_request))
     application.add_handler(CommandHandler("start", start_command))
 
-    print("𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 Bot is running successfully with both posts...")
+    print("𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 Bot is running successfully with all posts and admin logs...")
     application.run_polling()
 
 if __name__ == '__main__':
