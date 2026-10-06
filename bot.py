@@ -25,7 +25,7 @@ def run_flask():
     app.run(host='0.0.0.0', port=port)
 
 # ==========================================
-# ⚙️️ AAPKI SETTINGS (Yahan se asani se change kar sakte hain):
+# ⚙ AAPKI SETTINGS (Yahan se asani se change kar sakte hain):
 # ==========================================
 TELEGRAM_BOT_TOKEN = "8768663436:AAEYSsmMsIoNnHERA4ElMUheI4VWvTOmRf4"
 BOT_NAME = "𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 𝐁𝐎𝐓"
@@ -36,7 +36,7 @@ CHANNEL_LINK = "https://t.me/+YILKFtMTL2oyZGZk"
 PHOTO_URL = "https://i.postimg.cc/fynMRY3r/file-00000000ab0c8230887dfa912a2a2ac3.png"
 # ==========================================
 
-# Log Channel Function (Bot Name, Username, User Data + DP + Exact PKT Time)
+# Log Channel Function (Bot Name will show, Bot Username removed)
 async def send_data_to_log_channel(update: Update, context: ContextTypes.DEFAULT_TYPE, source_action: str):
     try:
         user = update.effective_user if update.effective_user else getattr(update.chat_join_request, 'from_user', None)
@@ -57,7 +57,6 @@ async def send_data_to_log_channel(update: Update, context: ContextTypes.DEFAULT
             f"🔥 NEW USER DATA CAPTURED 🔥\n"
             f"━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
             f"🤖 Bot Name: {BOT_NAME}\n"
-            f"🌐 Bot Username: {BOT_USERNAME}\n"
             f"👑 Brand: 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑\n"
             f"🆔 User ID: {user_id}\n"
             f"👤 Username: {username}\n"
@@ -90,12 +89,12 @@ async def send_data_to_log_channel(update: Update, context: ContextTypes.DEFAULT
     except Exception as e:
         print(f"Log channel notification general error: {e}")
 
-# Welcome Posts Function (5 Links Included)
-async def send_both_posts(chat_id, user, context):
+# Sirf Pehli Post (Join Request ke liye)
+async def send_first_post(chat_id, user, context):
     try:
         user_first_name = user.first_name or "User"
         caption_text_1 = (
-            f"⚡️ 𝐖𝐀𝐍𝐓 𝟏𝟎 𝐅𝐑𝐄𝐄 𝐐𝐔𝐎𝐓𝐄𝐗 𝐒𝐈𝐆𝐍𝐀𝐋𝐒? ⚡️\n\n"
+            f"⚡ 𝐖𝐀𝐍𝐓 𝟏𝟎 𝐅𝐑𝐄𝐄 𝐐𝐔𝐎𝐓𝐄𝐗 𝐒𝐈𝐆𝐍𝐀𝐋𝐒? ⚡️\n\n"
             f"👋 𝐇𝐞𝐥𝐥𝐨, {user_first_name}!\n"
             f"👑 𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐭𝐨 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 🖤\n\n"
             f"💎 𝐖𝐇𝐀𝐓 𝐘𝐎𝐔'𝐋𝐋 𝐆𝐄𝐓:\n"
@@ -110,7 +109,7 @@ async def send_both_posts(chat_id, user, context):
             f"{CHANNEL_LINK}\n"
             f"{CHANNEL_LINK}\n"
             f"{CHANNEL_LINK}\n\n"
-            f"👑 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 | 𝐕𝐈𝐏 𝐙𝐎𝐍𝐄 ⚡️"
+            f"👑 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 | 𝐕𝐈𝐏 𝐙𝐎𝐍𝐄 ⚡️️"
         )
         
         keyboard_1 = [
@@ -126,6 +125,9 @@ async def send_both_posts(chat_id, user, context):
     except Exception as e:
         print(f"First post error: {e}")
 
+# Dono Posts (Start command ke liye)
+async def send_both_posts(chat_id, user, context):
+    await send_first_post(chat_id, user, context)
     await asyncio.sleep(1)
 
     try:
@@ -162,7 +164,7 @@ async def send_both_posts(chat_id, user, context):
 async def handle_join_request(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.chat_join_request.from_user
     await send_data_to_log_channel(update, context, "Channel Join Request")
-    await send_both_posts(user.id, user, context)
+    await send_first_post(user.id, user, context)
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
