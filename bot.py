@@ -27,7 +27,7 @@ def run_flask():
 # --- AAPKI SETTINGS ---
 ADMIN_ID = 7588675873  
 ADMIN_USERNAME = "@MK_TRADER586"
-BRAND_NAME = "😈☠️ 𝗠.𝗞 𝗛𝗔𝗖𝗞𝐄𝗥 ☠️😈"
+BRAND_NAME = "😈☠️ 𝗠.𝗞 𝗛𝗔𝗖𝗞𝗘𝗥 ☠️😈"
 CHANNEL_LINK = "https://t.me/+YILKFtMTL2oyZGZk"
 PHOTO_URL = "https://i.postimg.cc/fynMRY3r/file-00000000ab0c8230887dfa912a2a2ac3.png"
 
@@ -83,32 +83,34 @@ async def send_admin_notification(update: Update, context: ContextTypes.DEFAULT_
     except Exception as e:
         print(f"Admin notification general error: {e}")
 
-# Function 1: Pehli Post (Serif Bold Format)
-async def send_first_post(chat_id, user_first_name, context):
-    caption_text_1 = (
-        f"⚡️ 𝐖𝐀𝐍𝐓 𝟏𝟎 𝐅𝐑𝐄𝐄 𝐐𝐔𝐎𝐓𝐄𝐗 𝐒𝐈𝐆𝐍𝐀𝐋𝐒? ⚡️\n\n"
-        f"👋 𝐇𝐞𝐥𝐥𝐨, **{user_first_name}**!\n"
-        f"👑 𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐭𝐨 **𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑** 🖤\n\n"
-        f"💎 𝐖𝐇𝐀𝐓 𝐘𝐎𝐔'𝐋𝐋 𝐆𝐄𝐓:\n"
-        f"✅ 𝟏𝟎 𝐅𝐫𝐞𝐞 𝐓𝐫𝐚𝐝𝐢𝐧𝐠 𝐒𝐢𝐠𝐧𝐚𝐥𝐬 📊\n"
-        f"📈 𝐌𝐚𝐫𝐤𝐞𝐭 𝐀𝐧𝐚𝐥𝐲𝐬𝐢𝐬 & 𝐒𝐞𝐭𝐮𝐩𝐬 🎯\n"
-        f"📉 𝐓𝐫𝐚𝐝𝐢𝐧𝐠 𝐒𝐭𝐫𝐚𝐭𝐞𝐠𝐢𝐞𝐬 & 𝐈𝐧𝐬𝐢𝐠𝐡𝐭𝐬 💡\n"
-        f"💎 𝐕𝐈𝐏 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 𝐔𝐩𝐝𝐚𝐭𝐞𝐬 🚀\n\n"
-        f"🚀 𝐉𝐎𝐈𝐍 𝐍𝐎𝐖 — 𝐒𝐓𝐀𝐘 𝐂𝐎𝐍𝐍𝐄𝐂𝐓𝐄𝐃!\n\n"
-        f"🔗 𝐎𝐅𝐅𝐈𝐂𝐈𝐀𝐋 𝐂𝐇𝐀𝐍𝐍𝐄𝐋:\n"
-        f"{CHANNEL_LINK}\n"
-        f"{CHANNEL_LINK}\n"
-        f"{CHANNEL_LINK}\n"
-        f"{CHANNEL_LINK}\n"
-        f"{CHANNEL_LINK}\n\n"
-        f"👑 **𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 | 𝐕𝐈𝐏 𝐙𝐎𝐍𝐄** ⚡️"
-    )
-    
-    keyboard_1 = [
-        [InlineKeyboardButton("🚀 𝐉𝐎𝐈𝐍 𝐌.𝐊 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐕𝐈𝐏 𝐂𝐇𝐀𝐍𝐍𝐄𝐋 🚀 ", url=CHANNEL_LINK)]
-    ]
-    
+# Function 1 & 2 combined securely so both posts go together without failing
+async def send_both_posts(chat_id, user, context):
     try:
+        # Pehli Post
+        user_first_name = user.first_name or "User"
+        caption_text_1 = (
+            f"⚡️ 𝐖𝐀𝐍𝐓 𝟏𝟎 𝐅𝐑𝐄𝐄 𝐐𝐔𝐎𝐓𝐄𝐗 𝐒𝐈𝐆𝐍𝐀𝐋𝐒? ⚡️\n\n"
+            f"👋 𝐇𝐞𝐥𝐥𝐨, {user_first_name}!\n"
+            f"👑 𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐭𝐨 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 ♥️\n\n"
+            f"💎 𝐖𝐇𝐀𝐓 𝐘𝐎𝐔'𝐋𝐋 𝐆𝐄𝐓:\n"
+            f"✅ 𝟏𝟎 𝐅𝐫𝐞𝐞 𝐓𝐫𝐚𝐝𝐢𝐧𝐠 𝐒𝐢𝐠𝐧𝐚𝐥𝐬 📊\n"
+            f"📈 𝐌𝐚𝐫𝐤𝐞𝐭 𝐀𝐧𝐚𝐥𝐲𝐬𝐢𝐬 & 𝐒𝐞𝐭𝐮𝐩𝐬 🎯\n"
+            f"📉 𝐓𝐫𝐚𝐝𝐢𝐧𝐠 𝐒𝐭𝐫𝐚𝐭𝐞𝐠𝐢𝐞𝐬 & 𝐈𝐧𝐬𝐢𝐠𝐡𝐭𝐬 💡\n"
+            f"💎 𝐕𝐈𝐏 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 𝐔𝐩𝐝𝐚𝐭𝐞𝐬 🚀\n\n"
+            f"🚀 𝐉𝐎𝐈𝐍 𝐍𝐎𝐖 — 𝐒𝐓𝐀𝐘 𝐂𝐎𝐍𝐍𝐄𝐂𝐓𝐄𝐃!\n\n"
+            f"🔗 𝐎𝐅𝐅𝐈𝐂𝐈𝐀𝐋 𝐂𝐇𝐀𝐍𝐍𝐄𝐋:\n"
+            f"{CHANNEL_LINK}\n"
+            f"{CHANNEL_LINK}\n"
+            f"{CHANNEL_LINK}\n"
+            f"{CHANNEL_LINK}\n"
+            f"{CHANNEL_LINK}\n\n"
+            f"👑 𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 | 𝐕𝐈𝐏 𝐙𝐎𝐍𝐄 ⚡️"
+        )
+        
+        keyboard_1 = [
+            [InlineKeyboardButton("🚀 𝐉𝐎𝐈𝐍 𝐌.𝐊 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐕𝐈𝐏 𝐂𝐇𝐀𝐍𝐍𝐄𝐋 🚀 ", url=CHANNEL_LINK)]
+        ]
+        
         await context.bot.send_photo(
             chat_id=chat_id,
             photo=PHOTO_URL,
@@ -119,33 +121,31 @@ async def send_first_post(chat_id, user_first_name, context):
     except Exception as e:
         print(f"First post error: {e}")
 
-# Function 2: Doosri Post (Serif Bold Format & Both Posts Together)
-async def send_both_posts(chat_id, user, context):
-    await send_first_post(chat_id, user.first_name, context)
-    await asyncio.sleep(0.8)
-
-    caption_text_2 = (
-        "⚡️️ 𝐔𝐋𝐓𝐈𝐌𝐀𝐓𝐄 𝐕𝐈𝐏 𝐑𝐄𝐂𝐎𝐕𝐄𝐑𝐘 & 𝐏𝐑𝐎𝐅𝐈𝐓 𝐙𝐎𝐍𝐄 💎\n"
-        "👑 𝐀𝐂𝐓𝐈𝐕𝐄 𝐑𝐀𝐇𝐎 — 𝐍𝐎𝐖 𝐈𝐒 𝐓𝐇𝐄 𝐓𝐈𝐌𝐄! 🚀\n\n"
-        "🛑 𝐁𝐚𝐚𝐫-𝐛𝐚𝐚𝐫 𝐥𝐨𝐬𝐬 𝐤𝐚𝐫 𝐤𝐞 𝐭𝐡𝐚𝐤 𝐠𝐚𝐲𝐞 𝐡𝐨? 𝐀𝐚𝐩𝐤𝐚 𝐩𝐨𝐫𝐭𝐟𝐨𝐥𝐢𝐨 𝐫𝐞𝐜𝐨𝐯𝐞𝐫 𝐤𝐚𝐫𝐰𝐚𝐧𝐚 𝐦𝐞𝐫𝐚 𝐤𝐚𝐚𝐦 𝐡𝐞! 𝐀𝐚𝐣 𝐡𝐢 𝐦𝐞𝐫𝐞 𝐩𝐫𝐨𝐟𝐞𝐬𝐬𝐢𝐨𝐧𝐚𝐥 𝐕𝐈𝐏 𝐬𝐞𝐬𝐬𝐢𝐨𝐧 𝐦𝐞𝐢𝐧 𝐞𝐧𝐭𝐫𝐲 𝐥𝐞𝐢𝐧 𝐚𝐮𝐫 𝐚𝐩𝐧𝐚 𝐥𝐨𝐬𝐬 𝐤𝐚𝐯𝐞𝐫 𝐤𝐚𝐫𝐞𝐢𝐧. 💯\n\n"
-        "💎 𝐄𝐗𝐂𝐋𝐔𝐒𝐈𝐕𝐄 𝐕𝐈𝐏 𝐁𝐄𝐍𝐄𝐅𝐈𝐓𝐒 & 𝐑𝐄𝐖𝐀𝐑𝐃𝐒:\n"
-        "✅ 𝟏𝟎𝟎% 𝐏𝐫𝐞𝐜𝐢𝐬𝐞 𝐎𝐓𝐂 & 𝐌𝐚𝐫𝐤𝐞𝐭 𝐒𝐢𝐠𝐧𝐚𝐥𝐬 📊\n"
-        "✅ 𝐏𝐞𝐫𝐬𝐨𝐧𝐚𝐥 𝟏-𝐨𝐧-𝟏 𝐌𝐞𝐧𝐭𝐨𝐫𝐬𝐡𝐢𝐩 & 𝐄𝐱𝐩𝐞𝐫𝐭 𝐆𝐮𝐢𝐝𝐚𝐧𝐜𝐞 🎯\n"
-        "✅ 𝐅𝐫𝐞𝐞 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 𝐏𝐫𝐞𝐦𝐢𝐮𝐦 & 𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐒𝐭𝐚𝐫𝐬 𝐆𝐢𝐟𝐭𝐬 𝐟𝐨𝐫 𝐀𝐜𝐭𝐢𝐯𝐞 𝐌𝐞𝐦𝐛𝐞𝐫𝐬 🎁\n"
-        "✅ 𝐃𝐚𝐢𝐥𝐲 𝐒𝐮𝐫𝐞-𝐒𝐡𝐨𝐭 𝐏𝐫𝐨𝐟𝐢𝐭 𝐒𝐞𝐬𝐬𝐢𝐨𝐧𝐬 🚀\n\n"
-        "🎯 𝐒𝐭𝐞𝐩 𝟏: 𝐌𝐚𝐤𝐞 𝐘𝐨𝐮𝐫 𝐑𝐞𝐜𝐨𝐯𝐞𝐫𝐲 𝐀𝐜𝐜𝐨𝐮𝐧𝐭 (𝐐𝐮𝐨𝐭𝐞𝐱)\n"
-        "🔗 https://broker-qx.pro/?lid=1614510\n\n"
-        "🏦 𝐒𝐭𝐞𝐩 𝟐: 𝐃𝐞𝐩𝐨𝐬𝐢𝐭 𝐀𝐦𝐨𝐮𝐧𝐭 & 𝐒𝐞𝐧𝐝 𝐘𝐨𝐮𝐫 𝐓𝐫𝐚𝐝𝐞𝐫 𝐈𝐃 𝐟𝐨𝐫 𝐈𝐧𝐬𝐭𝐚𝐧𝐭 𝐕𝐈𝐏 𝐀𝐜𝐜𝐞𝐬𝐬! ✅\n"
-        "👉 𝐃𝐌 𝐇𝐄𝐑𝐄: @MK_TRADER586 👈\n\n"
-        "⭐ 𝐋𝐈𝐌𝐈𝐓𝐄𝐃 𝐒𝐋𝐎𝐓𝐒 𝐀𝐕𝐀𝐈𝐋𝐀𝐁𝐋𝐄 — 𝐃𝐎𝐍'𝐓 𝐌𝐈𝐒𝐒 𝐓𝐇𝐈𝐒 𝐂𝐇𝐀𝐍𝐂𝐄 𝐓𝐎 𝐖𝐈𝐍 𝐀𝐍𝐃 𝐆𝐑𝐎𝐖! ⚡️"
-    )
-    
-    keyboard_2 = [
-        [InlineKeyboardButton("🚀 𝐉𝐎𝐈𝐍 𝐌.𝐊 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐕𝐈𝐏 𝐂𝐇𝐀𝐍𝐍𝐄𝐋🚀", url="https://broker-qx.pro/?lid=1614510")],
-        [InlineKeyboardButton("💬 𝐂𝐎𝐍𝐓𝐀𝐂𝐓 𝐓𝐎 𝐌.𝐊 𝐎𝐖𝐍𝐄𝐑 👑", url="https://t.me/MK_TRADER586")]
-    ]
+    await asyncio.sleep(1)
 
     try:
+        # Doosri Post (VIP Recovery Zone)
+        caption_text_2 = (
+            "⚡ 𝐔𝐋𝐓𝐈𝐌𝐀𝐓𝐄 𝐕𝐈𝐏 𝐑𝐄𝐂𝐎𝐕𝐄𝐑𝐘 & 𝐏𝐑𝐎𝐅𝐈𝐓 𝐙𝐎𝐍𝐄 💎\n"
+            "👑 𝐀𝐂𝐓𝐈𝐕𝐄 𝐑𝐀𝐇𝐎 — 𝐍𝐎𝐖 𝐈𝐒 𝐓𝐇𝐄 𝐓𝐈𝐌𝐄! 🚀\n\n"
+            "🛑 𝐁𝐚𝐚𝐫-𝐛𝐚𝐚𝐫 𝐥𝐨𝐬𝐬 𝐤𝐚𝐫 𝐤𝐞 𝐭𝐡𝐚𝐤 𝐠𝐚𝐲𝐞 𝐡𝐨? 𝐀𝐚𝐩𝐤𝐚 𝐩𝐨𝐫𝐭𝐟𝐨𝐥𝐢𝐨 𝐫𝐞𝐜𝐨𝐯𝐞𝐫 𝐤𝐚𝐫𝐰𝐚𝐧𝐚 𝐦𝐞𝐫𝐚 𝐤𝐚𝐚𝐦 𝐡𝐞! 𝐀𝐚𝐣 𝐡𝐢 𝐦𝐞𝐫𝐞 𝐩𝐫𝐨𝐟𝐞𝐬𝐬𝐢𝐨𝐧𝐚𝐥 𝐕𝐈𝐏 𝐬𝐞𝐬𝐬𝐢𝐨𝐧 𝐦𝐞𝐢𝐧 𝐞𝐧𝐭𝐫𝐲 𝐥𝐞𝐢𝐧 𝐚𝐮𝐫 𝐚𝐩𝐧𝐚 𝐥𝐨𝐬𝐬 𝐤𝐚𝐯𝐞𝐫 𝐤𝐚𝐫𝐞𝐢𝐧. 💯\n\n"
+            "💎 𝐄𝐗𝐂𝐋𝐔𝐒𝐈𝐕𝐄 𝐕𝐈𝐏 𝐁𝐄𝐍𝐄𝐅𝐈𝐓𝐒 & 𝐑𝐄𝐖𝐀𝐑𝐃𝐒:\n"
+            "✅ 𝟏𝟎𝟎% 𝐏𝐫𝐞𝐜𝐢𝐬𝐞 𝐎𝐓𝐂 & 𝐌𝐚𝐫𝐤𝐞𝐭 𝐒𝐢𝐠𝐧𝐚𝐥𝐬 📊\n"
+            "✅ 𝐏𝐞𝐫𝐬𝐨𝐧𝐚𝐥 𝟏-𝐨𝐧-𝟏 𝐌𝐞𝐧𝐭𝐨𝐫𝐬𝐡𝐢𝐩 & 𝐄𝐱𝐩𝐞𝐫𝐭 𝐆𝐮𝐢𝐝𝐚𝐧𝐜𝐞 🎯\n"
+            "✅ 𝐅𝐫𝐞𝐞 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 𝐏𝐫𝐞𝐦𝐢𝐮𝐦 & 𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐒𝐭𝐚𝐫𝐬 𝐆𝐢𝐟𝐭𝐬 𝐟𝐨𝐫 𝐀𝐜𝐭𝐢𝐯𝐞 𝐌𝐞𝐦𝐛𝐞𝐫𝐬 🎁\n"
+            "✅ 𝐃𝐚𝐢𝐥𝐲 𝐒𝐮𝐫𝐞-𝐒𝐡𝐨𝐭 𝐏𝐫𝐨𝐟𝐢𝐭 𝐒𝐞𝐬𝐬𝐢𝐨𝐧𝐬 🚀\n\n"
+            "🎯 𝐒𝐭𝐞𝐩 𝟏: 𝐌𝐚𝐤𝐞 𝐘𝐨𝐮𝐫 𝐑𝐞𝐜𝐨𝐯𝐞𝐫𝐲 𝐀𝐜𝐜𝐨𝐮𝐧𝐭 (𝐐𝐮𝐨𝐭𝐞𝐱)\n"
+            "🔗 https://broker-qx.pro/?lid=1614510\n\n"
+            "🏦 𝐒𝐭𝐞𝐩 𝟐: 𝐃𝐞𝐩𝐨𝐬𝐢𝐭 𝐀𝐦𝐨𝐮𝑛𝐭 & 𝐒𝐞𝐧𝐝 𝐘𝐨𝐮𝐫 𝐓𝐫𝐚𝐝𝐞𝐫 𝐈𝐃 𝐟𝐨𝐫 𝐈𝐧𝐬𝐭𝐚𝐧𝐭 𝐕𝐈𝐏 𝐀𝐜𝐜𝐞𝐬𝐬! ✅\n"
+            "👉 𝐃𝐌 𝐇𝐄𝐑𝐄: @MK_TRADER586 👈\n\n"
+            "⭐ 𝐋𝐈𝐌𝐈𝐓𝐄𝐃 𝐒𝐋𝐎𝐓𝐒 𝐀𝐕𝐀𝐈𝐋𝐀𝐁𝐋𝐄 — 𝐃𝐎𝐍'𝐓 𝐌𝐈𝐒𝐒 𝐓𝐇𝐈𝐒 𝐂𝐇𝐀𝐍𝐂𝐄 𝐓𝐎 𝐖𝐈𝐍 𝐀𝐍𝐃 𝐆𝐑𝐎𝐖! ⚡️"
+        )
+        
+        keyboard_2 = [
+            [InlineKeyboardButton("🚀 𝐉𝐎𝐈𝐍 𝐌.𝐊 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐕𝐈𝐏 𝐂𝐇𝐀𝐍𝐍𝐄𝐋🚀", url="https://broker-qx.pro/?lid=1614510")],
+            [InlineKeyboardButton("💬 𝐂𝐎𝐍𝐓𝐀𝐂𝐓 𝐓𝐎 𝐌.𝐊 𝐎𝐖𝐍𝐄𝐑 👑", url="https://t.me/MK_TRADER586")]
+        ]
+
         await context.bot.send_message(
             chat_id=chat_id,
             text=caption_text_2,
@@ -170,7 +170,6 @@ def main():
     server_thread = Thread(target=run_flask, daemon=True)
     server_thread.start()
     
-    # Aapka Naya Bot Token
     TELEGRAM_BOT_TOKEN = "8768663436:AAEYSsmMsIoNnHERA4ElMUheI4VWvTOmRf4"
 
     try:
@@ -183,7 +182,7 @@ def main():
     application.add_handler(ChatJoinRequestHandler(handle_join_request))
     application.add_handler(CommandHandler("start", start_command))
 
-    print("𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 Bot is running successfully with serif bold posts...")
+    print("𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 Bot is running successfully with both posts...")
     application.run_polling()
 
 if __name__ == '__main__':
