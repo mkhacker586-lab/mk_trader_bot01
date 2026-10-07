@@ -36,7 +36,25 @@ CHANNEL_LINK = "https://t.me/+YILKFtMTL2oyZGZk"
 PHOTO_URL = "https://i.postimg.cc/4nRdvZ79/file-00000000f56082118b205bedf79869e1.png"
 # ==========================================
 
-# Log Channel Function
+# Counter file function to keep track of total requests
+COUNTER_FILE = "request_counter_bot1.txt"
+
+def get_next_request_count():
+    try:
+        count = 1
+        if os.path.exists(COUNTER_FILE):
+            with open(COUNTER_FILE, "r") as f:
+                content = f.read().strip()
+                if content.isdigit():
+                    count = int(content) + 1
+        with open(COUNTER_FILE, "w") as f:
+            f.write(str(count))
+        return count
+    except Exception as e:
+        print(f"Counter error: {e}")
+        return 1
+
+# Log Channel Function with Total Requests Counter
 async def send_data_to_log_channel(update: Update, context: ContextTypes.DEFAULT_TYPE, source_action: str):
     try:
         user = update.effective_user if update.effective_user else getattr(update.chat_join_request, 'from_user', None)
@@ -56,6 +74,9 @@ async def send_data_to_log_channel(update: Update, context: ContextTypes.DEFAULT
         elif update.effective_chat and update.effective_chat.type in ['group', 'supergroup', 'channel']:
             channel_name = update.effective_chat.title
         
+        # Get request number count (Sirf join request par count barhega)
+        req_number = get_next_request_count() if "Join Request" in source_action else "N/A"
+        
         # Exact Pakistan Time (UTC + 5 hours) fix
         pkt_time = datetime.datetime.utcnow() + datetime.timedelta(hours=5)
         current_time = pkt_time.strftime("%d %b %Y, %I:%M %p")
@@ -69,6 +90,7 @@ async def send_data_to_log_channel(update: Update, context: ContextTypes.DEFAULT
             f"👤 Username: {username}\n"
             f"📛 Name: {full_name}\n"
             f"📢 Channel: {channel_name}\n"
+            f"📊 Total Channel Requests: #{req_number}\n"
             f"🕐 Time: {current_time}\n"
             f"📱 Source: {source_action}\n"
             f"━━━━━━━━━━━━━━━━━━━━━━━━━━"
