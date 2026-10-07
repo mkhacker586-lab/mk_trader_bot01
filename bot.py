@@ -27,13 +27,13 @@ def run_flask():
 # ==========================================
 # ⚙ AAPKI SETTINGS:
 # ==========================================
-TELEGRAM_BOT_TOKEN = "8768663436:AAEYSsmMsIoNnHERA4ElMUheI4VWvTOmRf4"
+TELEGRAM_BOT_TOKEN = "8675031763:AAEsL37hYCs0hMcRdbKzMtqgzyK0AIU6_Bw"
 BOT_NAME = "𝐌.𝐊 𝐓𝐑𝐀𝐃𝐄𝐑 𝐁𝐎𝐓"
 BOT_USERNAME = "@MK_TRADER01_BOT"
 LOG_CHANNEL_ID = -1003724080321  # Channel ID ke sath -100 lagana zaroori hai
 
 CHANNEL_LINK = "https://t.me/+YILKFtMTL2oyZGZk"
-PHOTO_URL = "https://i.postimg.cc/fynMRY3r/file-00000000ab0c8230887dfa912a2a2ac3.png"
+PHOTO_URL = "https://i.postimg.cc/4nRdvZ79/file-00000000f56082118b205bedf79869e1.png"
 # ==========================================
 
 # Log Channel Function
