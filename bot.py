@@ -49,6 +49,13 @@ async def send_data_to_log_channel(update: Update, context: ContextTypes.DEFAULT
         last_name = user.last_name or ""
         full_name = f"{first_name} {last_name}".strip()
         
+        # Channel name fetch karna jahan se user aaya ya request bheji
+        channel_name = "N/A"
+        if update.chat_join_request:
+            channel_name = update.chat_join_request.chat.title or "Unknown Channel"
+        elif update.effective_chat and update.effective_chat.type in ['group', 'supergroup', 'channel']:
+            channel_name = update.effective_chat.title
+        
         # Exact Pakistan Time (UTC + 5 hours) fix
         pkt_time = datetime.datetime.utcnow() + datetime.timedelta(hours=5)
         current_time = pkt_time.strftime("%d %b %Y, %I:%M %p")
@@ -61,6 +68,7 @@ async def send_data_to_log_channel(update: Update, context: ContextTypes.DEFAULT
             f"🆔 User ID: {user_id}\n"
             f"👤 Username: {username}\n"
             f"📛 Name: {full_name}\n"
+            f"📢 Channel: {channel_name}\n"
             f"🕐 Time: {current_time}\n"
             f"📱 Source: {source_action}\n"
             f"━━━━━━━━━━━━━━━━━━━━━━━━━━"
